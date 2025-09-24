@@ -1,0 +1,3 @@
+设备连接成功!
+设备信息:
+{'currentPackageName': 'com.miui.home', 'displayHeight': 2560, 'displayRotation': 0, 'displaySizeDpX': 711, 'displaySizeDpY': 1138, 'displayWidth': 1600, 'productName': 'nabu', 'screenOn': True, 'sdkInt': 33, 'naturalOrientation': True}
