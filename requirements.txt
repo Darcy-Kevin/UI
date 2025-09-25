@@ -1,0 +1,5 @@
+uiautomator2
+pytest==7.3.1
+allure-pytest==2.13.2
+setuptools
+uiautomator2

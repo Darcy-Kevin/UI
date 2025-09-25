@@ -1,5 +1,0 @@
-"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"测试在指定坐标位置执行点击操作","10565","test_perform_click","src.tests","Wed Sep 24 12:26:04 CST 2025","passed","Wed Sep 24 12:26:15 CST 2025","TestWZQApp","app_launch_test","",""
-"测试等待棋力评测界面出现","10091","test_wait_for_ui_element","src.tests","Wed Sep 24 12:25:54 CST 2025","passed","Wed Sep 24 12:26:04 CST 2025","TestWZQApp","app_launch_test","",""
-"测试等待棋力评测界面出现","9691","test_wait_for_ui_element","","Wed Sep 24 12:25:38 CST 2025","passed","Wed Sep 24 12:25:47 CST 2025","","","",""
-"测试启动五子棋应用","4208","test_launch_app","src.tests","Wed Sep 24 12:25:50 CST 2025","passed","Wed Sep 24 12:25:54 CST 2025","TestWZQApp","app_launch_test","",""

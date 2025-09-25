@@ -22,9 +22,10 @@ class TestWZQApp:
         print("设备信息:")
         print(driver.info)  # 打印设备信息
         yield driver
-        # 测试结束后清理资源
-        driver.app_stop("com.duole.wuziqihd")
-        print("测试结束，已关闭应用")
+
+        # 测试结束后清理资源——暂时先不关闭
+        # driver.app_stop("com.duole.wuziqihd")
+        # print("测试结束，已关闭应用")
         
     @allure.feature("应用启动")
     @allure.story("启动五子棋应用")
