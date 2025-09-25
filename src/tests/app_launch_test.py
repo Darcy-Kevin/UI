@@ -7,6 +7,8 @@ import uiautomator2 as u2
 import time
 import pytest
 import allure
+# 导入截图工具函数
+from ..utils.screenshot_utils import attach_screenshot_to_allure, get_current_time_str
 
 # 导入坐标参数
 from ..config.coordinates import click_position_PVE
@@ -31,11 +33,19 @@ class TestWZQApp:
     @allure.story("启动五子棋应用")
     def test_launch_app(self, driver):
         """测试启动五子棋应用"""
-        with allure.step("清理后台应用并启动指定包名的应用"):
-            # 启动应用前先清理后台，确保应用是最新状态
-            driver.app_stop("com.duole.wuziqihd")
-            # 启动指定包名的应用
-            driver.app_start("com.duole.wuziqihd")
+        with allure.step(f"[{get_current_time_str()}] 清理后台应用并启动指定包名的应用"):
+            try:
+                # 启动应用前先清理后台，确保应用是最新状态
+                driver.app_stop("com.duole.wuziqihd")
+                # 启动指定包名的应用
+                driver.app_start("com.duole.wuziqihd")
+                allure.attach(f"[{get_current_time_str()}] 已启动应用com.duole.wuziqihd", "操作结果")
+            except Exception as e:
+                print(f"启动应用时发生错误: {e}")
+                allure.attach(f"[{get_current_time_str()}] {str(e)}", "错误信息", allure.attachment_type.TEXT)
+                # 截图保存错误状态
+                attach_screenshot_to_allure(driver, "app_launch_error", f"[{get_current_time_str()}] 启动应用错误时的界面")
+                raise
             
         with allure.step("验证应用启动成功"):
             # 等待应用启动并获取当前包名
@@ -48,28 +58,36 @@ class TestWZQApp:
     @allure.story("等待棋力评测界面")
     def test_wait_for_ui_element(self, driver):
         """测试等待棋力评测界面出现"""
-        with allure.step(f"等待'棋力评测'界面出现..."):
+        with allure.step(f"[{get_current_time_str()}] 等待'棋力评测'界面出现..."):
             try:
                 result = self.wait_for_ui_element(driver, "棋力评测")
                 assert result is True, "未能找到'棋力评测'界面"
-                allure.attach("找到棋力评测界面", "验证结果")
+                # 截图保存棋力评测元素出现的界面
+                attach_screenshot_to_allure(driver, "chess_rating_element_displayed", f"[{get_current_time_str()}] 棋力评测元素显示")
+                allure.attach(f"[{get_current_time_str()}] 找到棋力评测界面", "验证结果")
             except Exception as e:
-                allure.attach(str(e), "错误信息", allure.attachment_type.TEXT)
+                allure.attach(f"[{get_current_time_str()}] {str(e)}", "错误信息", allure.attachment_type.TEXT)
+                # 截图保存错误状态
+                attach_screenshot_to_allure(driver, "chess_rating_element_error", f"[{get_current_time_str()}] 等待棋力评测元素错误")
                 raise
     
     @allure.feature("用户操作")
     @allure.story("点击指定坐标")
     def test_perform_click(self, driver):
         """测试在指定坐标位置执行点击操作"""
-        with allure.step(f"点击坐标: {click_position_PVE}"):
+        with allure.step(f"[{get_current_time_str()}] 点击坐标: {click_position_PVE}"):
             try:
                 # 确保棋力评测界面已出现
                 self.wait_for_ui_element(driver, "棋力评测")
                 # 执行点击
                 driver.click(click_position_PVE[0], click_position_PVE[1])
-                allure.attach(f"已点击坐标: {click_position_PVE}", "操作结果")
+                # 截图保存点击后的界面
+                attach_screenshot_to_allure(driver, "chess_rating_element_clicked", f"[{get_current_time_str()}] 点击棋力评测元素后的界面")
+                allure.attach(f"[{get_current_time_str()}] 已点击坐标: {click_position_PVE}", "操作结果")
             except Exception as e:
-                allure.attach(str(e), "错误信息", allure.attachment_type.TEXT)
+                allure.attach(f"[{get_current_time_str()}] {str(e)}", "错误信息", allure.attachment_type.TEXT)
+                # 截图保存错误状态
+                attach_screenshot_to_allure(driver, "click_operation_error", f"[{get_current_time_str()}] 点击操作错误")
                 raise
     
     def wait_for_ui_element(self, driver, text="棋力评测", timeout=10.0):
