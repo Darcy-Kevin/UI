@@ -1,0 +1,8 @@
+设备连接成功!
+设备信息:
+{'currentPackageName': 'com.duole.wuziqihd', 'displayHeight': 2408, 'displayRotation': 0, 'displaySizeDpX': 360, 'displaySizeDpY': 803, 'displayWidth': 1080, 'productName': 'PD2112', 'screenOn': True, 'sdkInt': 30, 'naturalOrientation': True}
+发现隐私弹窗，点击同意按钮
+已保存截图: /Users/duole-b-01/UI/src/utils/../resources/screenshots/privacy_popup_agree_20250925_171204.png
+已保存截图: /Users/duole-b-01/UI/src/utils/../resources/screenshots/login_page_20250925_171210.png
+登录页面验证成功，找到了'通行证登录'文案
+已保存截图: /Users/duole-b-01/UI/src/utils/../resources/screenshots/login_page_verification_success_20250925_171210.png
