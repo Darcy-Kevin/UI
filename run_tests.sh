@@ -1,5 +1,5 @@
 #!/bin/bash
-#hhhhh
+
 # 清理旧的Allure结果和报告
 echo "清理旧的Allure测试结果和报告..."
 if [ -d "allure-results" ]; then
