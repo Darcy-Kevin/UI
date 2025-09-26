@@ -69,12 +69,3 @@ def attach_screenshot_to_allure(driver, screenshot_name, description, folder_pat
             print(f"附加截图到Allure报告失败: {e}")
             return None
     return None
-
-
-def get_current_time_str():
-    """获取当前时间的格式化字符串，用于Allure报告
-    
-    Returns:
-        str: 格式化的当前时间字符串
-    """
-    return datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')[:-3]
