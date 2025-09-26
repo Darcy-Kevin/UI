@@ -1,0 +1,1 @@
+{"name": "test_launch_app_and_verify_login_page", "status": "skipped", "description": "测试启动应用、处理隐私弹窗并验证登录页面", "start": 1758864936927, "stop": 1758864936927, "uuid": "f655af13-079e-4a87-9029-991a010937b0", "testCaseId": "0c86731229a95b61bac7309333ec6943", "fullName": "src.tests.app_logininterface_test.TestWZQLoginInterface#test_launch_app_and_verify_login_page"}
