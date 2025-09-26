@@ -7,8 +7,9 @@ import uiautomator2 as u2
 import time
 import pytest
 import allure
-# 导入截图工具函数
-from ..utils.screenshot_utils import attach_screenshot_to_allure, get_current_time_str
+# 导入工具函数
+from ..utils.screenshot_utils import attach_screenshot_to_allure
+from ..utils.time_utils import get_current_time_str
 
 class TestWZQLoginInterface:
     """五子棋应用登录界面测试类"""
