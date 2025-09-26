@@ -1,7 +1,9 @@
 #!/bin/bash
 
-# 清理旧的Allure结果和报告
-echo "清理旧的Allure测试结果和报告..."
+# 清理旧的测试文件和数据
+echo "清理上次测试产生的所有文件和数据..."
+
+# 清理Allure结果和报告目录
 if [ -d "allure-results" ]; then
   rm -rf allure-results/*
   echo "  已清理allure-results目录"
@@ -10,6 +12,24 @@ if [ -d "allure-report" ]; then
   rm -rf allure-report/*
   echo "  已清理allure-report目录"
 fi
+
+# 清理测试截图目录
+if [ -d "src/resources/screenshots" ]; then
+  rm -rf src/resources/screenshots/*
+  echo "  已清理src/resources/screenshots目录"
+fi
+
+# 清理pytest缓存目录
+if [ -d ".pytest_cache" ]; then
+  rm -rf .pytest_cache/*
+  echo "  已清理.pytest_cache目录"
+fi
+
+# 清理__pycache__目录
+find . -name "__pycache__" -type d | while read -r dir; do
+  rm -rf "$dir"/*
+  echo "  已清理$dir目录"
+done
 
 # 激活虚拟环境
 echo "
