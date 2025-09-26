@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """五子棋应用登录界面测试脚本
 此脚本用于自动连接设备、启动五子棋应用、处理隐私弹窗并验证登录页面。
 """
@@ -8,8 +9,10 @@ import time
 import pytest
 import allure
 # 导入工具函数
-from ..utils.screenshot_utils import attach_screenshot_to_allure
-from ..utils.time_utils import get_current_time_str
+from src.utils.screenshot_utils import attach_screenshot_to_allure
+from src.utils.time_utils import get_current_time_str
+# 导入配置
+from src.config.coordinates import LoginButtonConfig, SDKPrivacyConfig  # 导入登录按钮和SDK隐私配置
 
 class TestWZQLoginInterfaceShow:
     """五子棋应用登录界面元素展示测试类"""
@@ -40,7 +43,8 @@ class TestWZQLoginInterfaceShow:
         with allure.step(f"[{get_current_time_str()}] 处理隐私弹窗"):
             try:
                 # 尝试查找隐私弹窗（使用resourceId）
-                if driver(resourceId="com.duole.wuziqihd:id/dl_sdk_privacy_title").wait(timeout=10.0):
+                sdk_privacy_title = SDKPrivacyConfig.get_sdk_privacy_title()
+                if driver(resourceId=sdk_privacy_title).wait(timeout=10.0):
                     print("发现隐私弹窗，点击同意按钮")
                     driver(text="同意").click()
                     allure.attach(f"[{get_current_time_str()}] 已处理隐私弹窗", "操作结果")
@@ -64,17 +68,18 @@ class TestWZQLoginInterfaceShow:
                 
                 # 直接查找"通行证登录"文本，与同意按钮保持一致的查找方式
                 # if driver(text="通行证登录").wait(timeout=5.0):
-                if driver(resourceId="com.duole.wuziqihd:id/dl_sdk_acc_common_login").wait(timeout=5.0):
-                    print("登录页面验证成功，找到了'通行证登录'文案")
+                common_login_button = LoginButtonConfig.get_common_login_button()
+                if driver(resourceId=common_login_button).wait(timeout=5.0):
+                    print("登录页面验证成功，找到了'通行证登录'按钮")
                     assert True
-                    allure.attach(f"[{get_current_time_str()}] 登录页面验证成功，找到了'通行证登录'文案", "验证结果")
+                    allure.attach(f"[{get_current_time_str()}] 登录页面验证成功，找到了'通行证登录'按钮", "验证结果")
                     # 截图保存成功状态
                     attach_screenshot_to_allure(driver, "login_page_verification_success", f"[{get_current_time_str()}] 登录页面验证成功")
                 else:
-                    print("登录页面验证失败，未找到'通行证登录'文案")
+                    print("登录页面验证失败，未找到'通行证登录'按钮")
                     # 截图保存失败证据
                     attach_screenshot_to_allure(driver, "login_page_verification_failure", f"[{get_current_time_str()}] 登录页面验证失败")
-                    assert False, "登录页面未找到'通行证登录'文案"
+                    assert False, "登录页面未找到'通行证登录'按钮" 
             except Exception as e:
                 print(f"验证登录页面时发生错误: {e}")
                 # 截图保存错误证据，使用带时间戳的截图函数
@@ -95,9 +100,11 @@ class TestWZQLoginInterfaceShow:
         with allure.step(f"[{get_current_time_str()}] 处理隐私弹窗"):
             try:
                 # 尝试查找隐私弹窗（使用resourceId）
-                if driver(resourceId="com.duole.wuziqihd:id/dl_sdk_privacy_title").wait(timeout=10.0):
+                sdk_privacy_title = SDKPrivacyConfig.get_sdk_privacy_title()
+                if driver(resourceId=sdk_privacy_title).wait(timeout=10.0):
                     print("发现隐私弹窗，点击同意按钮")
-                    driver(text="同意").click()
+                    sdk_privacy_agree = SDKPrivacyConfig.get_sdk_privacy_agree()
+                    driver(resourceId=sdk_privacy_agree).click()
                     allure.attach(f"[{get_current_time_str()}] 已处理隐私弹窗", "操作结果")
                 else:
                     print("没有发现隐私弹窗")
@@ -112,7 +119,8 @@ class TestWZQLoginInterfaceShow:
                 time.sleep(5)  # 增加等待时间确保页面完全加载
                 
                 # 查找人工客服按钮（使用resourceId）
-                if driver(resourceId="com.duole.wuziqihd:id/dl_sdk_acc_login_service").wait(timeout=10.0):
+                login_service_button = LoginButtonConfig.get_service_button()
+                if driver(resourceId=login_service_button).wait(timeout=10.0):
                     print("找到了人工客服按钮")
                     allure.attach(f"[{get_current_time_str()}] 找到了人工客服按钮", "验证结果")
                     # 给人工客服按钮区域截图
@@ -141,7 +149,8 @@ class TestWZQLoginInterfaceShow:
         with allure.step(f"[{get_current_time_str()}] 处理隐私弹窗"):
             try:
                 # 尝试查找隐私弹窗（使用resourceId）
-                if driver(resourceId="com.duole.wuziqihd:id/dl_sdk_privacy_title").wait(timeout=10.0):
+                sdk_privacy_title = SDKPrivacyConfig.get_sdk_privacy_title()
+                if driver(resourceId=sdk_privacy_title).wait(timeout=10.0):
                     print("发现隐私弹窗，点击同意按钮")
                     driver(text="同意").click()
                     allure.attach(f"[{get_current_time_str()}] 已处理隐私弹窗", "操作结果")
@@ -158,7 +167,8 @@ class TestWZQLoginInterfaceShow:
                 time.sleep(5)  # 增加等待时间确保页面完全加载
                 
                 # 查找上传日志按钮（使用resourceId）
-                if driver(resourceId="com.duole.wuziqihd:id/dl_sdk_acc_login_upload_log").wait(timeout=10.0):
+                login_upload_button = LoginButtonConfig.get_upload_log_button()
+                if driver(resourceId=login_upload_button).wait(timeout=10.0):
                     print("找到了上传日志按钮")
                     allure.attach(f"[{get_current_time_str()}] 找到了上传日志按钮", "验证结果")
                     # 给上传日志按钮区域截图
@@ -202,7 +212,8 @@ class TestWZQLoginInterfaceClick:
         with allure.step(f"[{get_current_time_str()}] 处理隐私弹窗"):
             try:
                 # 尝试查找隐私弹窗（使用resourceId）
-                if driver(resourceId="com.duole.wuziqihd:id/dl_sdk_privacy_title").wait(timeout=10.0):
+                sdk_privacy_title = SDKPrivacyConfig.get_sdk_privacy_title()
+                if driver(resourceId=sdk_privacy_title).wait(timeout=10.0):
                     print("发现隐私弹窗，点击同意按钮")
                     driver(text="同意").click()
                     allure.attach(f"[{get_current_time_str()}] 已处理隐私弹窗", "操作结果")
@@ -219,10 +230,11 @@ class TestWZQLoginInterfaceClick:
                 time.sleep(5)  # 增加等待时间确保页面完全加载
                 
                 # 查找人工客服按钮（使用resourceId）
-                if driver(resourceId="com.duole.wuziqihd:id/dl_sdk_acc_login_service").wait(timeout=10.0):
+                login_service_button = LoginButtonConfig.get_service_button()
+                if driver(resourceId=login_service_button).wait(timeout=10.0):
                     print("找到了人工客服按钮")
                     # 点击人工客服按钮
-                    driver(resourceId="com.duole.wuziqihd:id/dl_sdk_acc_login_service").click()
+                    driver(resourceId=login_service_button).click()
                     allure.attach(f"[{get_current_time_str()}] 点击了人工客服按钮", "操作结果")
                     # 等待页面跳转
                     time.sleep(3)
