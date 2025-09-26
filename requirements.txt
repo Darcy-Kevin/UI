@@ -1,5 +1,5 @@
-uiautomator2
+uiautomator2==2.16.3
 pytest==7.3.1
 allure-pytest==2.13.2
-setuptools
-uiautomator2
+setuptools>=65.0.0
+pillow>=9.0.0
