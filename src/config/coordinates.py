@@ -24,12 +24,71 @@ click_position_PVE = (0.536, 0.342)
 # click_position_cancel = (0.25, 0.7)
 
 # 启动隐私弹窗resourceId合集
-sdk_privacy_title = "com.duole.wuziqihd:id/dl_sdk_privacy_title" # 启动隐私弹窗标题resourceId
-sdk_privacy_disagree = "com.duole.wuziqihd:id/dl_sdk_privacy_disagree" # 启动隐私弹窗拒绝按钮resourceId
-sdk_privacy_agree = "com.duole.wuziqihd:id/dl_sdk_privacy_agree" # 启动隐私弹窗同意按钮resourceId
+class SDKPrivacyConfig:
+    """启动隐私弹窗配置类，集中管理所有启动隐私弹窗相关的resourceId"""
+    @staticmethod
+    def get_sdk_privacy_title():
+        """获取启动隐私弹窗标题resourceId"""
+        return "com.duole.wuziqihd:id/dl_sdk_privacy_title" # 启动隐私弹窗标题resourceId
+    @staticmethod
+    def get_sdk_privacy_disagree():
+        """获取启动隐私弹窗拒绝按钮resourceId"""
+        return "com.duole.wuziqihd:id/dl_sdk_privacy_disagree" # 启动隐私弹窗拒绝按钮resourceId
+    @staticmethod
+    def get_sdk_privacy_agree():
+        """获取启动隐私弹窗同意按钮resourceId"""
+        return "com.duole.wuziqihd:id/dl_sdk_privacy_agree" # 启动隐私弹窗同意按钮resourceId
+
 # 登录大厅按钮resourceId合集
-common_login_button = "com.duole.wuziqihd:id/dl_sdk_acc_common_login" # 登录大厅按钮resourceId
-wechat_login_button = "com.duole.wuziqihd:id/dl_sdk_acc_wechat_login" # 微信登录按钮resourceId
-login_service_button = "com.duole.wuziqihd:id/dl_sdk_acc_login_service" # 人工客服按钮resourceId
-login_upload_button = "com.duole.wuziqihd:id/dl_sdk_acc_login_upload_log" # 上传日志按钮resourceId
-login_age_button = "com.duole.wuziqihd:id/dl_sdk_acc_login_suitable_age" # 适龄提醒按钮resourceId
+class LoginButtonConfig:
+    """登录大厅按钮配置类，集中管理所有登录相关按钮的resourceId"""
+    
+    @staticmethod
+    def get_common_login_button():
+        """获取普通登录按钮resourceId"""
+        return "com.duole.wuziqihd:id/dl_sdk_acc_common_login"
+    
+    @staticmethod
+    def get_wechat_login_button():
+        """获取微信登录按钮resourceId"""
+        return "com.duole.wuziqihd:id/dl_sdk_acc_wechat_login"
+    
+    @staticmethod
+    def get_service_button():
+        """获取人工客服按钮resourceId"""
+        return "com.duole.wuziqihd:id/dl_sdk_acc_login_service"
+    
+    @staticmethod
+    def get_upload_log_button():
+        """获取上传日志按钮resourceId"""
+        return "com.duole.wuziqihd:id/dl_sdk_acc_login_upload_log"
+    
+    @staticmethod
+    def get_suitable_age_button():
+        """获取适龄提醒按钮resourceId"""
+        return "com.duole.wuziqihd:id/dl_sdk_acc_login_suitable_age"
+    
+    @staticmethod
+    def get_privacy_checkbox():
+        """获取登录隐私弹窗勾选框resourceId"""
+        return "com.duole.wuziqihd:id/dl_sdk_acc_login_privacy_checkbox"
+    
+    @staticmethod
+    def get_all_resource_ids():
+        """获取所有登录相关按钮的resourceId字典"""
+        return {
+            'common_login': LoginButtonConfig.get_common_login_button(),
+            'wechat_login': LoginButtonConfig.get_wechat_login_button(),
+            'service_button': LoginButtonConfig.get_service_button(),
+            'upload_log': LoginButtonConfig.get_upload_log_button(),
+            'suitable_age': LoginButtonConfig.get_suitable_age_button(),
+            'privacy_checkbox': LoginButtonConfig.get_privacy_checkbox()
+        }
+
+# 为了向后兼容，保留原有的常量定义
+common_login_button = LoginButtonConfig.get_common_login_button()
+wechat_login_button = LoginButtonConfig.get_wechat_login_button()
+login_service_button = LoginButtonConfig.get_service_button()
+login_upload_button = LoginButtonConfig.get_upload_log_button()
+login_age_button = LoginButtonConfig.get_suitable_age_button()
+login_privacy_checkbox = LoginButtonConfig.get_privacy_checkbox()
